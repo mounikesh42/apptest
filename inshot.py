@@ -1,9 +1,25 @@
 
 
 import subprocess
-
+import time
 def inshot():
     package_name = 'com.camerasideas.instashot'
+    activity_name = '.MainActivity'
+
+    # Construct the adb command to open the app
+    open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+
+    # Construct the adb command to force-stop the app
+    stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
+
+    # Open the app using the subprocess module
+    subprocess.Popen(open_cmd)
+
+    # Wait for 10 seconds
+    time.sleep(5)
+
+    # Force-stop the app using the subprocess module
+    subprocess.Popen(stop_cmd)
 
     result = subprocess.run(['adb', 'shell', 'dumpsys', 'package', package_name], capture_output=True, text=True)
 

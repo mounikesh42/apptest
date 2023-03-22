@@ -1,11 +1,23 @@
 import subprocess
-
+import time
 
 
 
 def scratch():
     package_name = 'org.scratchjr.android'
+    activity_name = '.ScratchJrActivity'
 
+    # Construct the adb command to open the app
+    open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+
+    subprocess.Popen(open_cmd)
+
+    time.sleep(5)
+
+
+
+    stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
+    subprocess.Popen(stop_cmd)
     result = subprocess.run(['adb', 'shell', 'dumpsys', 'package', package_name], capture_output=True, text=True)
 
 

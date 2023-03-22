@@ -14,35 +14,38 @@ import subprocess
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
 
-
+#
 edlp()
 print("")
-
+esfile()
+print("")
+safe()
+print("")
+#
 scratch()
 print("")
-
+whiteboard()
+print("")
+shareit()
+print("")
+wps()
+print("")
 koto()
 print("")
 
-whiteboard()
-print("")
 
 inshot()
 print("")
+#
 
-esfile()
-print("")
-
-wps()
-print("")
-
-safe()
-print("")
-
-shareit()
-print("")
+#
 
 
-settings()
+
+
+
+
+
+# settings()
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'false'])

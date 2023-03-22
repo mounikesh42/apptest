@@ -4,6 +4,7 @@ from PIL import Image
 import pytesseract
 from PIL import Image
 import time
+import subprocess
 desired_caps = {
     'platformName': 'Android',
     'deviceName': 'Android Emulator',
@@ -15,12 +16,28 @@ desired_caps = {
 
 def wps():
 
-    driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    package_name = 'cn.wps.moffice_eng'
+    activity_name = 'cn.wps.moffice.documentmanager.PreStartActivity2'
+
+    # Construct the adb command to open the app
+    open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+    stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
+
+    # Construct the adb command to take a screenshot
+
+    # Open the app using the subprocess module
+    # Wait for 10 seconds
+    subprocess.Popen(open_cmd)
+
     time.sleep(5)
-    perms = driver.get_screenshot_as_file('wps.png')
-    driver.quit()
+    subprocess.run(['adb', 'shell', 'screencap', '/sdcard/wps.png'])
+
+    subprocess.run(['adb', 'pull', '/sdcard/wps.png', 'wps.png'])
+
 
     # Load the image
+    subprocess.Popen(stop_cmd)
+
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
     # Load the screenshot image
