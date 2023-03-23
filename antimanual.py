@@ -7,6 +7,7 @@ from koto import koto
 from whiteboard import whiteboard
 from inshot import inshot
 from esfile import esfile
+from sketch import sketch
 # from settings import settings
 import subprocess
 from io import StringIO
@@ -21,59 +22,31 @@ subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
 name = subprocess.run(['adb', 'devices'])
 
-
-
-# def run_and_save():
-#     # Run the three functions and capture their output in a list
-#     output = []
-#     output.append(edlp())
-#     output.append(esfile())
-#     output.append(safe())
-#
-#     # Convert the list to a CSV-formatted string
-#     csv_data = StringIO()
-#     writer = csv.writer(csv_data)
-#     for row in output:
-#         writer.writerow([row])
-#
-#     # Save the CSV-formatted string to a file
-#     with open('output.csv', 'w') as f:
-#         f.write(csv_data.getvalue())
-import csv
-import io
-import contextlib
-from edlp import edlp
-from esfile import esfile
-from safe import safe
-
 def run_and_save():
     # Create a dictionary mapping the function names to their function objects
-    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe}
+    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe,'scratch':scratch,'whiteboard':whiteboard,'wps':wps,'shareit':shareit,'koto':koto,'inshot':inshot,'sketch':sketch}
 
     # Create an in-memory file object to capture the output
     output_file = io.StringIO()
 
-    # Create a dictionary to hold the output rows
-    output_dict = {'serialino':'','edlp': '', 'esfile': '', 'safe': ''}
-
-    # Iterate over the functions and capture their output
-    for name, func in function_dict.items():
-        # Redirect the output of the function to the in-memory file object
-        with contextlib.redirect_stdout(output_file):
-            func()
-        # Save the output to the output dictionary
-        output_dict[name] = output_file.getvalue().strip()
-        # Reset the in-memory file object for the next function
-        output_file.seek(0)
-        output_file.truncate()
-
-    # Write the output to a CSV file
-    with open('output.csv', 'w', newline='') as f:
+    # Open the CSV file in append mode
+    with open('output.csv', 'a', newline='') as f:
         writer = csv.writer(f)
-        # Write the header row
-        writer.writerow(['serialno','edlp', 'esfile', 'safe'])
-        # Write the output row
-        writer.writerow([output_dict['serialno'],output_dict['edlp'], output_dict['esfile'], output_dict['safe']])
+
+        # Iterate over the functions and capture their output
+        output_list = []
+        for name, func in function_dict.items():
+            # Redirect the output of the function to the in-memory file object
+            with contextlib.redirect_stdout(output_file):
+                func()
+            # Save the output to a list
+            output_list.append(output_file.getvalue().strip())
+            # Reset the in-memory file object for the next function
+            output_file.seek(0)
+            output_file.truncate()
+
+        # Write the output list as a new row to the CSV file
+        writer.writerow(output_list)
 
 
 run_and_save()
