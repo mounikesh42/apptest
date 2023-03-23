@@ -15,14 +15,17 @@ import csv
 import io
 import contextlib
 from serialno import serialno
+from time import time
 
 
 script_info = """
-\033[32mAnti-manual script  v1.0\033[0m
-\033[32m Connect device and run the script before that make sure debugging is turned ON \033[0m
-\033[32m Happy Testing :) \033[0m
+ Anti-manual script  v1.0
+ Connect device and run the script before that make sure debugging is turned ON
+ Happy Testing :)
 
-\033[32m Fervid Smart Solutions Private Limited.\033[0m
+ Fervid Smart Solutions Private Limited
+
+
 
 
 
@@ -41,11 +44,26 @@ if __name__ == '__main__':
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
-name = subprocess.run(['adb', 'devices'])
 
+
+folder_exists = False
+cmd = 'adb shell ls /storage/emulated/0/Erudex'
+output = subprocess.getoutput(cmd)
+if "No such file or directory" not in output:
+    folder_exists = True
+
+# Count the number of files in the folder
+num_files = 0
+if folder_exists:
+    cmd = 'adb shell ls -1 /storage/emulated/0/Erudex | find /v /c ""'
+    output = subprocess.getoutput(cmd)
+    num_files = int(output.strip())
+
+print(f"Folder exists: {folder_exists}")
+print(f"Number of files: {num_files}")
 def run_and_save():
     # Create a dictionary mapping the function names to their function objects
-    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe,'scratch':scratch,'whiteboard':whiteboard,'wps':wps,'shareit':shareit,'koto':koto,'inshot':inshot,'sketch':sketch}
+    function_dict = {'serialno':serialno,'time':time, 'edlp': edlp, 'esfile': esfile, 'safe': safe,'scratch':scratch,'whiteboard':whiteboard,'wps':wps,'shareit':shareit,'koto':koto,'inshot':inshot,'sketch':sketch}
 
     # Create an in-memory file object to capture the output
     output_file = io.StringIO()
@@ -71,6 +89,27 @@ def run_and_save():
 
 
 run_and_save()
+
+
+cmd = ['adb', 'shell', 'date']
+
+    # Run the command
+process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+output, error = process.communicate()
+
+    # Decode the output
+output = output.decode().strip()
+
+    # Extract the time information
+device_time = output.split(' ')[3]
+
+print('Device time:', device_time)
+
+
+
+
+
+
 # edlp()
 # print("")
 # esfile()
@@ -94,19 +133,6 @@ run_and_save()
 # print("")
 
 
-cmd = ['adb', 'shell', 'date']
-
-# Run the command
-process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-output, error = process.communicate()
-
-# Decode the output
-output = output.decode().strip()
-
-# Extract the time information
-device_time = output.split(' ')[3]
-
-print('Device time:', device_time)
 
 
 # Construct the command

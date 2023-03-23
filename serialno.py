@@ -12,3 +12,6 @@ def serialno():
     device_serial_number = output.decode().strip()
 
     print('Device serial number:', device_serial_number)
+
+
+serialno()

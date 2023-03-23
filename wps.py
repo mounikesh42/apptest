@@ -53,4 +53,4 @@ def wps():
     if "START" in text:
         print("Permissions failed for WPS APP")
     else:
-        print("Permissions granted for wps APP")
+        print("All Permissions granted for wps APP")
