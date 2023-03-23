@@ -9,33 +9,55 @@ from inshot import inshot
 from esfile import esfile
 # from settings import settings
 import subprocess
+from io import StringIO
+import csv
 
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
 name = subprocess.run(['adb', 'devices'])
 
-edlp()
-print("")
-esfile()
-print("")
-safe()
-print("")
+
+
+def run_and_save():
+    # Run the three functions and capture their output in a list
+    output = []
+    output.append(edlp())
+    output.append(esfile())
+    output.append(safe())
+
+    # Convert the list to a CSV-formatted string
+    csv_data = StringIO()
+    writer = csv.writer(csv_data)
+    for row in output:
+        writer.writerow([row])
+
+    # Save the CSV-formatted string to a file
+    with open('output.csv', 'w') as f:
+        f.write(csv_data.getvalue())
+
+run_and_save()
+# edlp()
+# print("")
+# esfile()
+# print("")
+# safe()
+# print("")
+# #
+# scratch()
+# print("")
+# whiteboard()
+# print("")
+# shareit()
+# print("")
+# wps()
+# print("")
+# koto()
+# print("")
 #
-scratch()
-print("")
-whiteboard()
-print("")
-shareit()
-print("")
-wps()
-print("")
-koto()
-print("")
-
-
-inshot()
-print("")
+#
+# inshot()
+# print("")
 
 
 cmd = ['adb', 'shell', 'date']
