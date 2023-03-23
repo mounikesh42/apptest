@@ -11,6 +11,10 @@ from esfile import esfile
 import subprocess
 from io import StringIO
 import csv
+import io
+import contextlib
+from serialno import serialno
+
 
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
@@ -19,18 +23,49 @@ name = subprocess.run(['adb', 'devices'])
 
 
 
+# def run_and_save():
+#     # Run the three functions and capture their output in a list
+#     output = []
+#     output.append(edlp())
+#     output.append(esfile())
+#     output.append(safe())
+#
+#     # Convert the list to a CSV-formatted string
+#     csv_data = StringIO()
+#     writer = csv.writer(csv_data)
+#     for row in output:
+#         writer.writerow([row])
+#
+#     # Save the CSV-formatted string to a file
+#     with open('output.csv', 'w') as f:
+#         f.write(csv_data.getvalue())
 def run_and_save():
-    # Run the three functions and capture their output in a list
-    output = []
-    output.append(edlp())
-    output.append(esfile())
-    output.append(safe())
+    # Create a dictionary mapping the function names to their function objects
+    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe }
 
-    # Convert the list to a CSV-formatted string
-    csv_data = StringIO()
+    # Create an in-memory file object to capture the output
+    output_file = io.StringIO()
+
+    # Create a dictionary to hold the output of each function
+    output_dict = {}
+
+    # Iterate over the functions and capture their output
+    for name, func in function_dict.items():
+        # Redirect the output of the function to the in-memory file object
+        with contextlib.redirect_stdout(output_file):
+            func()
+        # Save the output to a dictionary with the function name as the key
+        output_dict[name] = output_file.getvalue()
+        # Reset the in-memory file object for the next function
+        output_file.seek(0)
+        output_file.truncate()
+
+    # Convert the dictionary to a CSV-formatted string
+    csv_data = io.StringIO()
     writer = csv.writer(csv_data)
-    for row in output:
-        writer.writerow([row])
+    writer.writerow(['Function Name', 'Output'])
+    for name, output in output_dict.items():
+        writer.writerow([name, output])
 
     # Save the CSV-formatted string to a file
     with open('output.csv', 'w') as f:
@@ -76,16 +111,6 @@ print('Device time:', device_time)
 
 
 # Construct the command
-cmd = ['adb', 'get-serialno']
-
-# Run the command
-process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-output, error = process.communicate()
-
-# Decode the output
-device_serial_number = output.decode().strip()
-
-print('Device serial number:', device_serial_number)
 
 #
 #
