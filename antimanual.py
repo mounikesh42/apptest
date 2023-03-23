@@ -17,6 +17,27 @@ import contextlib
 from serialno import serialno
 
 
+script_info = """
+\033[32mAnti-manual script  v1.0\033[0m
+\033[32m Connect device and run the script before that make sure debugging is turned ON \033[0m
+\033[32m Happy Testing :) \033[0m
+
+\033[32m Fervid Smart Solutions Private Limited.\033[0m
+
+
+
+          _   _ _______ _____      __  __          _   _ _    _         _
+     /\   | \ | |__   __|_   _|    |  \/  |   /\   | \ | | |  | |  /\   | |
+    /  \  |  \| |  | |    | |______| \  / |  /  \  |  \| | |  | | /  \  | |
+   / /\ \ | . ` |  | |    | |______| |\/| | / /\ \ | . ` | |  | |/ /\ \ | |
+  / ____ \| |\  |  | |   _| |_     | |  | |/ ____ \| |\  | |__| / ____ \| |____
+ /_/    \_\_| \_|  |_|  |_____|    |_|  |_/_/    \_\_| \_|\____/_/    \_\______|
+"""
+
+
+if __name__ == '__main__':
+    print(script_info)
+
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 

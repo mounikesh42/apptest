@@ -51,5 +51,3 @@ def sketch():
         print("All permissions granted for sketch app")
     else:
         print("Permissions missing")
-
-sketch()
