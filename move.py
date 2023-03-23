@@ -8,8 +8,12 @@ phone_folder_path = '/storage/emulated/0/'
 
 # construct the adb push command
 cmd = ['adb', 'push', new_folder_path, phone_folder_path]
-
+dele = ['adb','shell','rm','/storage/emulated/0/Erudex/*']
 # execute the adb push command using subprocess
+
+delete = subprocess.Popen(dele, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 # check if the device is connected for the first time
@@ -29,5 +33,5 @@ while first_connection:
         if 'error' in stdout_output:
             print('Error occurred during adb push:', stdout_output)
         else:
-            print('adb push completed successfully!')
+            print('replaced content successfully!')
         first_connection = False
