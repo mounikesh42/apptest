@@ -1,9 +1,2 @@
-Function Name,Output
-serialno,"Device serial number: HNP094T2
-"
-edlp,"All permissions granted for erudex app
-"
-esfile,"All permissions granted for esfile explorer app
-"
-safe,"Permissions Granted  for SAFE 
-"
+serialno,edlp,esfile,safe
+Device serial number: HNP094T2,All permissions granted for erudex app,All permissions granted for esfile explorer app,Permissions Granted  for SAFE

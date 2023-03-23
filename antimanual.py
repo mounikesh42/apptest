@@ -39,37 +39,42 @@ name = subprocess.run(['adb', 'devices'])
 #     # Save the CSV-formatted string to a file
 #     with open('output.csv', 'w') as f:
 #         f.write(csv_data.getvalue())
+import csv
+import io
+import contextlib
+from edlp import edlp
+from esfile import esfile
+from safe import safe
+
 def run_and_save():
     # Create a dictionary mapping the function names to their function objects
-    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe }
+    function_dict = {'serialno':serialno,'edlp': edlp, 'esfile': esfile, 'safe': safe}
 
     # Create an in-memory file object to capture the output
     output_file = io.StringIO()
 
-    # Create a dictionary to hold the output of each function
-    output_dict = {}
+    # Create a dictionary to hold the output rows
+    output_dict = {'serialino':'','edlp': '', 'esfile': '', 'safe': ''}
 
     # Iterate over the functions and capture their output
     for name, func in function_dict.items():
         # Redirect the output of the function to the in-memory file object
         with contextlib.redirect_stdout(output_file):
             func()
-        # Save the output to a dictionary with the function name as the key
-        output_dict[name] = output_file.getvalue()
+        # Save the output to the output dictionary
+        output_dict[name] = output_file.getvalue().strip()
         # Reset the in-memory file object for the next function
         output_file.seek(0)
         output_file.truncate()
 
-    # Convert the dictionary to a CSV-formatted string
-    csv_data = io.StringIO()
-    writer = csv.writer(csv_data)
-    writer.writerow(['Function Name', 'Output'])
-    for name, output in output_dict.items():
-        writer.writerow([name, output])
+    # Write the output to a CSV file
+    with open('output.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        # Write the header row
+        writer.writerow(['serialno','edlp', 'esfile', 'safe'])
+        # Write the output row
+        writer.writerow([output_dict['serialno'],output_dict['edlp'], output_dict['esfile'], output_dict['safe']])
 
-    # Save the CSV-formatted string to a file
-    with open('output.csv', 'w') as f:
-        f.write(csv_data.getvalue())
 
 run_and_save()
 # edlp()
