@@ -16,7 +16,7 @@ import io
 import contextlib
 from serialno import serialno
 from time import time
-
+from appnotifications import appnotifications
 
 script_info = """
  Anti-manual script  v1.0
@@ -68,22 +68,24 @@ def run_and_save():
     # Create an in-memory file object to capture the output
     output_file = io.StringIO()
 
+    # Iterate over the functions and capture their output
+    output_list = []
+    for name, func in function_dict.items():
+        # Redirect the output of the function to the in-memory file object
+        with contextlib.redirect_stdout(output_file):
+            func()
+        # Save the output to a list
+        output_value = output_file.getvalue().strip()
+        output_list.append(output_value)
+        # Reset the in-memory file object for the next function
+        output_file.seek(0)
+        output_file.truncate()
+        # Print the output to the terminal
+        print(f"{name}: {output_value}")
+
     # Open the CSV file in append mode
     with open('output.csv', 'a', newline='') as f:
         writer = csv.writer(f)
-
-        # Iterate over the functions and capture their output
-        output_list = []
-        for name, func in function_dict.items():
-            # Redirect the output of the function to the in-memory file object
-            with contextlib.redirect_stdout(output_file):
-                func()
-            # Save the output to a list
-            output_list.append(output_file.getvalue().strip())
-            # Reset the in-memory file object for the next function
-            output_file.seek(0)
-            output_file.truncate()
-
         # Write the output list as a new row to the CSV file
         writer.writerow(output_list)
 
@@ -133,7 +135,8 @@ print('Device time:', device_time)
 # print("")
 
 
-
+appnotifications()
+print("")
 
 # Construct the command
 

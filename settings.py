@@ -44,6 +44,8 @@ def settings():
     # driver.start_activity('com.android.settings', '.Settings$ConfigureNotificationSettingsActivity')
     driver.start_activity('com.android.settings', '.Settings$NotificationAppListActivity')
 
+    
+
 # Close the driver session
 
 settings()
