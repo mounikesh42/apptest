@@ -23,3 +23,72 @@ time.sleep(1)
 subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
 time.sleep(1)
 subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+time.sleep(1)
+
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:com.camerasideas.instashot'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:com.kotobee.readerapp'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:com.qihoo.security'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:org.scratchjr.android'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:com.lenovo.anyshare.gps'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:com.sonymobile.sketch'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:air.fourdWhiteboard.debug'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', 'package:cn.wps.moffice_eng'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '550', '650'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
