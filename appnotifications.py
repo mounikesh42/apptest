@@ -28,6 +28,8 @@ if 'cn.wps.moffice_eng' in output_str:
 
         # Simulate screen tap at (500, 550)
         subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+        time.sleep(1)
+
     else:
         print('noooo')
 
