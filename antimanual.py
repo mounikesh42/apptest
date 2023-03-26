@@ -16,7 +16,6 @@ import io
 import contextlib
 from serialno import serialno
 from time import time
-from appnotifications import appnotifications
 
 script_info = """
  Anti-manual script  v1.0
@@ -135,8 +134,8 @@ print('Device time:', device_time)
 # print("")
 
 
-appnotifications()
-print("")
+# appnotifications()
+# print("")
 
 # Construct the command
 

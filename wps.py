@@ -1,18 +1,10 @@
 # Import the Appium Python Client
-from appium import webdriver
 from PIL import Image
 import pytesseract
 from PIL import Image
 import time
 import subprocess
-desired_caps = {
-    'platformName': 'Android',
-    'deviceName': 'Android Emulator',
-    'appPackage': 'cn.wps.moffice_eng',
-    'appActivity': 'cn.wps.moffice.documentmanager.PreStartActivity2',
-    'autoGrantPermissions': False,
-    'noReset':True
-}
+
 
 def wps():
 

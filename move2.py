@@ -26,7 +26,12 @@ with open('device_data.csv', mode='a+', newline='') as csv_file:
     cmd = ['adb', 'push', new_folder_path, phone_folder_path]
 
     dele = ['adb','shell','rm','/storage/emulated/0/Erudex/*']
-
+    devices_output = subprocess.getoutput('adb devices -l')
+    device_name = None
+    for line in devices_output.split('\n'):
+        if 'model:' in line:
+            device_name = line.split('model:')[0].strip()
+            break
     # execute the adb push command using subprocess
     delete = subprocess.Popen(dele, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     delete.wait()
@@ -49,7 +54,31 @@ with open('device_data.csv', mode='a+', newline='') as csv_file:
             # process has completed, check for errors on stdout
             stdout_output = process.stdout.read().decode().strip()
             if 'error' in stdout_output:
+                with open('error.csv', mode='a+', newline='') as csv_file:
+                    fieldnames = ['Device', 'status']
+                    check = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+                    # check if the csv file is empty and write the headers
+                    csv_file.seek(0)
+                    first_char = csv_file.read(1)
+                    if not first_char:
+                        check.writeheader()
+
+                    check.writerow({'Device': device_name, 'status': 'failed'})
+
+
+
+
+
                 print('Error occurred during adb push:', stdout_output)
+                print(  """
+                   __      _ _          _               _
+                  / _|    (_) |        | |             | |
+                 | |_ __ _ _| | ___  __| |             | |
+                 |  _/ _` | | |/ _ \/ _` |             | |
+                 | || (_| | | |  __/ (_| |  _ _ _ _ _  |_|
+                 |_| \__,_|_|_|\___|\__,_| (_|_|_|_|_) (_)
+                                                          """ )
             else:
                 num_files = 0
                 # check if the Erudex folder exists on the device
@@ -63,12 +92,7 @@ with open('device_data.csv', mode='a+', newline='') as csv_file:
                     num_files = int(output.strip())
 
                 # write the device data to the csv file
-                devices_output = subprocess.getoutput('adb devices -l')
-                device_name = None
-                for line in devices_output.split('\n'):
-                    if 'model:' in line:
-                        device_name = line.split('model:')[0].strip()
-                        break
+
                 writer.writerow({'Device': device_name, 'Num_Files': num_files})
                 if num_files < 100:
                     if num_files > 100:
@@ -86,5 +110,7 @@ with open('device_data.csv', mode='a+', newline='') as csv_file:
 
                     print( 'Succes' )
                     print(f'Device: {device_name}')
+                    print(f'Device: {num_files}')
+
 
             first_connection = False
