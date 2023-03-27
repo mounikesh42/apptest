@@ -15,8 +15,9 @@ import csv
 import io
 import contextlib
 from serialno import serialno
-from time import time
+# from time import time
 from appnotifications import appnotifications
+import time
 
 script_info = """
  Anti-manual script  v1.0
@@ -61,9 +62,18 @@ if folder_exists:
 
 print(f"Folder exists: {folder_exists}")
 print(f"Number of files: {num_files}")
+ace = "adb uninstall com.sk.aceinstaller2"
+
+# Execute the command using subprocess
+aceuninstall = subprocess.run(ace, shell=True)
+print(aceuninstall)
+subprocess.run(['adb', 'shell', 'svc', 'wifi', 'disable'])
+
+
+
 def run_and_save():
     # Create a dictionary mapping the function names to their function objects
-    function_dict = {'serialno':serialno,'time':time, 'edlp': edlp, 'esfile': esfile, 'safe': safe,'scratch':scratch,'whiteboard':whiteboard,'wps':wps,'shareit':shareit,'koto':koto,'inshot':inshot,'sketch':sketch}
+    function_dict = {'serialno':serialno, 'edlp': edlp, 'esfile': esfile, 'safe': safe,'scratch':scratch,'whiteboard':whiteboard,'wps':wps,'shareit':shareit,'koto':koto,'inshot':inshot,'sketch':sketch}
 
     # Create an in-memory file object to capture the output
     output_file = io.StringIO()
@@ -91,6 +101,7 @@ def run_and_save():
 
 
 run_and_save()
+time.sleep(4)
 appnotifications()
 
 
@@ -112,48 +123,5 @@ print('Device time:', device_time)
 
 
 
-
-# edlp()
-# print("")
-# esfile()
-# print("")
-# safe()
-# print("")
-# #
-# scratch()
-# print("")
-# whiteboard()
-# print("")
-# shareit()
-# print("")
-# wps()
-# print("")
-# koto()
-# print("")
-#
-#
-# inshot()
-# print("")
-
-
-# appnotifications()
-# print("")
-
-# Construct the command
-
-#
-#
-
-#
-
-
-
-
-
-
-
-
-
-# settings()
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'false'])

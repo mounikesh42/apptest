@@ -18,7 +18,7 @@ def whiteboard():
     subprocess.Popen(open_cmd)
 
     # Wait for 10 seconds
-    time.sleep(3)
+    time.sleep(2)
 
     # Force-stop the app using the subprocess module
     subprocess.Popen(stop_cmd)

@@ -16,7 +16,7 @@ def inshot():
     subprocess.Popen(open_cmd)
 
     # Wait for 10 seconds
-    time.sleep(5)
+    time.sleep(3)
 
     # Force-stop the app using the subprocess module
     subprocess.Popen(stop_cmd)

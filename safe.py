@@ -21,7 +21,7 @@ def safe():
 
     subprocess.Popen(open_cmd)
 
-    time.sleep(5)
+    time.sleep(2)
 
 
 

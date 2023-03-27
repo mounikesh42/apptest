@@ -2,6 +2,8 @@ import subprocess
 import time
 # Run the command and capture the output as a byte string
 def appnotifications():
+
+    time.sleep(3)
     output = subprocess.run(['adb', 'shell', 'dumpsys', 'notification', '--noredact'], capture_output=True).stdout
 
     # Convert the byte string to a regular string
@@ -251,6 +253,7 @@ def appnotifications():
 
         else:
             print('noooo')
+# appnotifications()
     # hereeeeeeeeeeeeeee..................????????????????/
     # import subprocess
     # import time

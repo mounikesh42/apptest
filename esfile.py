@@ -13,7 +13,7 @@ def esfile():
 
     subprocess.Popen(open_cmd)
 
-    time.sleep(4)
+    time.sleep(2)
 
 
 
