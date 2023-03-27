@@ -16,6 +16,7 @@ import io
 import contextlib
 from serialno import serialno
 from time import time
+from appnotifications import appnotifications
 
 script_info = """
  Anti-manual script  v1.0
@@ -90,6 +91,7 @@ def run_and_save():
 
 
 run_and_save()
+appnotifications()
 
 
 cmd = ['adb', 'shell', 'date']
