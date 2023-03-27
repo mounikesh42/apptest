@@ -85,10 +85,26 @@ subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_AP
 # Wait for 2 seconds
 time.sleep(2)
 
-# Tap on Allow button
 subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
+
+
+# Tap on Allow button
+
 time.sleep(1)
+
+wps = 'cn.wps.moffice_eng'
+wpsactivity = 'cn.wps.moffice.documentmanager.PreStartActivity2'
+subprocess.run( ['adb', 'shell', 'am', 'start', '-n', f'{wps}/{wpsactivity}'])
+
+time.sleep(2)
+subprocess.run(['adb', 'shell', 'input', 'tap', '46', '956'])
+time.sleep(3)
+
+subprocess.run(['adb', 'shell', 'input', 'tap', '603', '1770'])
+
+
+
 
 
 subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION', '-d', 'package:com.lenovo.anyshare.gps'])
@@ -96,7 +112,16 @@ subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_AP
 # Wait for 2 seconds
 time.sleep(2)
 
+
+
 # Tap on Allow button
 subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
 time.sleep(1)
+shareit = 'com.lenovo.anyshare.gps'
+shareitactivity = 'com.lenovo.anyshare.ApMainActivity'
+subprocess.run( ['adb', 'shell', 'am', 'start', '-n', f'{shareit}/{shareitactivity}'])
+
+time.sleep(1)
+
+subprocess.run(['adb', 'shell', 'input', 'tap', '561', '1660'])
