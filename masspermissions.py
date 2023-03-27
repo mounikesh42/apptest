@@ -97,7 +97,7 @@ wps = 'cn.wps.moffice_eng'
 wpsactivity = 'cn.wps.moffice.documentmanager.PreStartActivity2'
 subprocess.run( ['adb', 'shell', 'am', 'start', '-n', f'{wps}/{wpsactivity}'])
 
-time.sleep(2)
+time.sleep(5)
 subprocess.run(['adb', 'shell', 'input', 'tap', '46', '956'])
 time.sleep(3)
 
@@ -117,11 +117,11 @@ time.sleep(2)
 # Tap on Allow button
 subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
-time.sleep(1)
+time.sleep(2)
 shareit = 'com.lenovo.anyshare.gps'
 shareitactivity = 'com.lenovo.anyshare.ApMainActivity'
 subprocess.run( ['adb', 'shell', 'am', 'start', '-n', f'{shareit}/{shareitactivity}'])
 
-time.sleep(1)
+time.sleep(4)
 
 subprocess.run(['adb', 'shell', 'input', 'tap', '561', '1660'])
