@@ -48,6 +48,6 @@ def koto():
         #         has_media_location_permission = True
 
     if has_read_storage_permission and has_write_storage_permission:
-        print("All permissions granted for Kotobee app")
+        print("Kotobee:Granted")
     else:
-        print("Permissions missing")
+        print("Kotobee:Failed")

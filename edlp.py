@@ -48,6 +48,6 @@ def edlp():
         #         has_media_location_permission = True
 
     if has_read_storage_permission and has_write_storage_permission :
-        print("All permissions granted for erudex app")
+        print("Erudex:Granted")
     else:
-        print("Permissions missing")
+        print("Erudex:Failed")

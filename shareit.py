@@ -13,9 +13,9 @@ def shareit():
     output = subprocess.check_output(["adb", "shell", "appops", "get", package_name, "MANAGE_EXTERNAL_STORAGE"]).decode("utf-8")
 
     if "allow" in output:
-        print("All Permissions granted  For shareit app")
+        print("Shareit:Granted")
     else:
-        print("Permissions not granted")
+        print("Shareit:Failed")
 
 
 # shareit()

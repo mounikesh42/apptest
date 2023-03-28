@@ -80,14 +80,6 @@ for whiteboardpermission in whiteboardpermissions:
 
 
 
-subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION', '-d', 'package:cn.wps.moffice_eng'])
-
-# Wait for 2 seconds
-time.sleep(2)
-
-subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
-
-
 
 # Tap on Allow button
 
@@ -107,21 +99,44 @@ subprocess.run(['adb', 'shell', 'input', 'tap', '603', '1770'])
 
 
 
-subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION', '-d', 'package:com.lenovo.anyshare.gps'])
+def shareit():
 
-# Wait for 2 seconds
-time.sleep(2)
+    package_name = 'com.lenovo.anyshare.gps'
+    output = subprocess.check_output(["adb", "shell", "appops", "get", package_name, "MANAGE_EXTERNAL_STORAGE"]).decode("utf-8")
+
+    if "allow" in output:
+        print("Shareit:Granted")
+    else:
+        subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION', '-d', 'package:com.lenovo.anyshare.gps'])
+
+        # Wait for 2 seconds
+        time.sleep(2)
 
 
 
-# Tap on Allow button
-subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+        # Tap on Allow button
+        subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
-time.sleep(1)
-shareit = 'com.lenovo.anyshare.gps'
-shareitactivity = 'com.lenovo.anyshare.ApMainActivity'
-subprocess.run( ['adb', 'shell', 'am', 'start', '-n', f'{shareit}/{shareitactivity}'])
+shareit()
 
-time.sleep(4)
 
-subprocess.run(['adb', 'shell', 'input', 'tap', '561', '1660'])
+
+def wps():
+    package_name = "cn.wps.moffice_eng"
+    output = subprocess.check_output(["adb", "shell", "appops", "get", package_name, "MANAGE_EXTERNAL_STORAGE"]).decode("utf-8")
+
+    if "allow" in output:
+        print("WPS:Granted")
+    else:
+        subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION', '-d', 'package:cn.wps.moffice_eng'])
+
+        # Wait for 2 seconds
+        time.sleep(2)
+
+        subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+
+
+
+
+
+wps()

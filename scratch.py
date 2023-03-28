@@ -44,6 +44,6 @@ def scratch():
                 has_media_location_permission = True
 
     if has_read_storage_permission and has_write_storage_permission and has_media_location_permission :
-        print("All permissions granted for Scratch.js app")
+        print("Scratch.js:Granted")
     else:
-        print("Permissions missing for scratch.js app ")
+        print("Scratch.js:Failed")

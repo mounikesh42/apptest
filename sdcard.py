@@ -17,20 +17,20 @@ def sdcard():
 
     if size_gb > 50:
         print("Size in GB: {:.2f}".format(size_gb))
+        dir_path = fields[5]
+        subprocess.run(["adb", "shell", f"touch '{dir_path}/test.txt'"])
+
+
+        output = subprocess.check_output(["adb", "shell", "ls", fields[5]]).decode("utf-8")
+        if "test.txt" in output:
+                    # Remove the test file
+            subprocess.run(["adb", "shell", "rm", fields[5] + "/test.txt"])
+            return("working:64 GB")
+        else:
+            return("SDcard issue please check")
     else:
-        print('Size is less than 64gb ')
+        return('SDcard issue please check')
 
 
 
     # Execute the adb shell touch command to create a test file in the specified directory
-    dir_path = fields[5]
-    subprocess.run(["adb", "shell", f"touch '{dir_path}/test.txt'"])
-
-
-    output = subprocess.check_output(["adb", "shell", "ls", fields[5]]).decode("utf-8")
-    if "test.txt" in output:
-            # Remove the test file
-        subprocess.run(["adb", "shell", "rm", fields[5] + "/test.txt"])
-        print("sd card is working with no issues")
-    else:
-        print("sd card issue")
