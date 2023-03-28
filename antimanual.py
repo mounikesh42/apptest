@@ -18,6 +18,7 @@ from serialno import serialno
 # from time import time
 from appnotifications import appnotifications
 import time
+from sdcard import sdcard
 
 script_info = """
  Anti-manual script  v1.0
@@ -69,6 +70,10 @@ aceuninstall = subprocess.run(ace, shell=True)
 print(aceuninstall)
 subprocess.run(['adb', 'shell', 'svc', 'wifi', 'disable'])
 
+time.sleep(2)
+appnotifications()
+
+time.sleep(2)
 
 
 def run_and_save():
@@ -101,27 +106,61 @@ def run_and_save():
 
 
 run_and_save()
-time.sleep(4)
-appnotifications()
 
 
-cmd = ['adb', 'shell', 'date']
 
-    # Run the command
+
+# Define the shell command to retrieve the device's current date and time with timezone offset
+
+
+
+time.sleep(1)
+
+
+
+
+package_name = 'com.erudex.eduapp.mauritius'
+activity_name = 'com.erudex.eduapp.SplashActivity'
+open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+
+# Construct the adb command to force-stop the app
+
+# Open the app using the subprocess module
+subprocess.Popen(open_cmd)
+
+time.sleep(1)
+
+cmd = ['adb', 'shell', 'date "+%Y-%m-%d %H:%M:%S %z"']
+
+# Run the command
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 output, error = process.communicate()
 
-    # Decode the output
+# Decode the output
 output = output.decode().strip()
 
-    # Extract the time information
-device_time = output.split(' ')[3]
+# Extract the time and timezone offset information
+device_time, timezone_offset = output.split(' ')[1:3]
 
+# Print the device time and timezone offset
 print('Device time:', device_time)
+print('Timezone offset:', timezone_offset)
 
+# Check if the timezone offset is GMT+4:00 (Mauritius Time)
+if timezone_offset == '+0400':
+    print('Device timezone is Mauritius Time ')
+else:
+    print('Device timezone is not set to Mauritius Time ')
 
+time.sleep(1)
+sdcard()
 
+time.sleep(1)
 
+output = subprocess.check_output(["adb", "shell", "getprop", "ro.build.version.incremental"]).decode("utf-8")
 
+# Print the build number
+print(output.strip())
+time.sleep(1)
 
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'false'])
