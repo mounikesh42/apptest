@@ -1,24 +1,27 @@
 import subprocess
+import time
 
-# Define the shell command to retrieve the device's current date and time with timezone offset
-cmd = ['adb', 'shell', 'date "+%Y-%m-%d %H:%M:%S %z"']
+# List of app package names to check for
+app_package_names = ['com.lenovo.anyshare.gps', 'com.sonymobile.sketch', 'org.scratchjr.android', 'com.qihoo.security', 'com.kotobee.readerapp', 'com.camerasideas.instashot', 'com.estrongs.android.pop', 'air.fourdWhiteboard.debug', 'cn.wps.moffice_eng']
 
-# Run the command
-process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-output, error = process.communicate()
+for app_package_name in app_package_names:
+    # Run the command and capture the output as a byte string
+    output = subprocess.run(['adb', 'shell', 'dumpsys', 'notification', '--noredact'], capture_output=True).stdout
 
-# Decode the output
-output = output.decode().strip()
+    # Convert the byte string to a regular string
+    output_str = output.decode('utf-8')
 
-# Extract the time and timezone offset information
-device_time, timezone_offset = output.split(' ')[1:3]
+    # Search for the app package name in the output
+    if app_package_name in output_str:
 
-# Print the device time and timezone offset
-print('Device time:', device_time)
-print('Timezone offset:', timezone_offset)
+        # Extract the line with the app's notification settings
+        lines = [line.strip() for line in output_str.split('\n') if app_package_name in line]
+        for line in lines:
+            if line.startswith('AppSettings:') and 'importance=NONE' not in line :
+                print(line)
+                # if line.startswith('AppSettings'):
+                #     print(line)
 
-# Check if the timezone offset is GMT+4:00 (Mauritius Time)
-if timezone_offset == '+0400':
-    print('Device timezone is Mauritius Time ')
-else:
-    print('Device timezone is not set to Mauritius Time ')
+
+                # if 'importance=NONE' not in line:
+                #     print(line.strip())
