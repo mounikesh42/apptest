@@ -16,7 +16,6 @@ import io
 import contextlib
 from serialno import serialno
 # from time import time
-from appnotifications import appnotifications
 import time
 from sdcard import sdcard
 
@@ -44,8 +43,11 @@ if __name__ == '__main__':
     print(script_info)
 
 
+
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
+time.sleep(1)
+notifications = subprocess.run(['python', 'notifications.py'])
 
 
 folder_exists = False
@@ -71,9 +73,7 @@ print(aceuninstall)
 subprocess.run(['adb', 'shell', 'svc', 'wifi', 'disable'])
 
 time.sleep(2)
-appnotifications()
 
-time.sleep(2)
 
 
 def run_and_save():
