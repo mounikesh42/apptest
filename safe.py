@@ -1,13 +1,6 @@
 import subprocess
-from appium import webdriver
-from PIL import Image
-import pytesseract
-from PIL import Image
 import time
 
-import subprocess
-import time
-from appium import webdriver
 
 def safe():
 

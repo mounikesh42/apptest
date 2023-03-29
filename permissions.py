@@ -1,5 +1,11 @@
 import subprocess
 import time
+
+
+subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
+
+subprocess.run(['adb', 'shell', 'input', 'keyevent', '82'])
+
 scratch = "org.scratchjr.android"
 
 # Define the permissions to grant
@@ -140,3 +146,5 @@ def wps():
 
 
 wps()
+
+subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'false'])

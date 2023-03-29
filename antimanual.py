@@ -49,16 +49,7 @@ subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 subprocess.run(['adb', 'shell', 'input', 'keyevent', '82'])
 
 
-subprocess.run(['adb', 'shell', 'input', 'keyevent', '3'], check=True)
 
-# execute 'adb shell input keyevent 187' to open recent apps
-subprocess.run(['adb', 'shell', 'input', 'keyevent', '187'], check=True)
-
-# execute 'adb shell input keyevent 61' to move to 'Clear All' button
-subprocess.run(['adb', 'shell', 'input', 'keyevent', '61'], check=True)
-
-# execute 'adb shell input keyevent 66' to press 'Clear All' button
-subprocess.run(['adb', 'shell', 'input', 'keyevent', '66'], check=True)
 
 time.sleep(1)
 notifications = subprocess.run(['python', 'notifications.py'])

@@ -1,8 +1,4 @@
 # Import the Appium Python Client
-from appium import webdriver
-from PIL import Image
-import pytesseract
-from PIL import Image
 import subprocess
 import time
 # Set up the Appium desired capabilities
