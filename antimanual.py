@@ -88,6 +88,7 @@ def run_and_save():
         output_file.truncate()
         # Print the output to the terminal
         print(f"{name}: {output_value}")
+    notifications = subprocess.run(['python', 'notifications.py'])
 
     folder_exists = False
     cmd = 'adb shell ls /storage/emulated/0/Erudex'
