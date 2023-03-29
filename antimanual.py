@@ -20,12 +20,8 @@ import time
 from sdcard import sdcard
 
 script_info = """
- Anti-manual script  v1.0
- Connect device and run the script before that make sure debugging is turned ON
- Happy Testing :)
-
- Fervid Smart Solutions Private Limited
-
+ Anti-manual script  v1.1
+ SUPPPPPPPERRRRRRRRR FASTTTTTT.............................!
 
 
 
@@ -169,6 +165,13 @@ def run_and_save():
             for line in lines:
                 if line.startswith('AppSettings:') and 'importance=NONE' not in line :
                     output_list.append(line)
+
+    # Navigate to the desired folder on the device
+    result = subprocess.run(["adb", "shell", "cd /storage/emulated/0/Erudex/; ls -1"], capture_output=True)
+    output = result.stdout.decode().strip()
+    file_names = output.split("\n")
+    print(file_names[0])
+    output_list.append(file_names[0])
 
 
     with open('output.csv', 'a', newline='') as f:
