@@ -47,11 +47,16 @@ if __name__ == '__main__':
 subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 
 subprocess.run(['adb', 'shell', 'input', 'keyevent', '82'])
+time.sleep(1)
+subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.NOTIFICATION_SETTINGS'])
 
+subprocess.run(['adb', 'shell', 'input', 'tap', '484', '596'])
 
 
 
 time.sleep(1)
+
+
 notifications = subprocess.run(['python', 'notifications.py'])
 
 
