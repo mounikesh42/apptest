@@ -49,8 +49,8 @@ subprocess.run(['adb', 'shell', 'svc', 'power', 'stayon', 'true'])
 subprocess.run(['adb', 'shell', 'input', 'keyevent', '82'])
 time.sleep(1)
 subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.NOTIFICATION_SETTINGS'])
-
-subprocess.run(['adb', 'shell', 'input', 'tap', '484', '596'])
+time.sleep(3)
+subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
 
 
