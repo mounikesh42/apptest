@@ -54,7 +54,8 @@ subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
 
 
 
-time.sleep(1)
+
+time.sleep(2)
 
 
 notifications = subprocess.run(['python', 'notifications.py'])
