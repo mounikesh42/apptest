@@ -2,23 +2,23 @@ import subprocess
 import time
 def esfile():
 
-
+    #
     package_name = 'com.estrongs.android.pop'
-
-
-    activity_name = 'com.estrongs.android.pop.view.FileExplorerActivity'
-
-    # Construct the adb command to open the app
-    open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
-
-    subprocess.Popen(open_cmd)
-
-    time.sleep(2)
-
-
-
-    stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
-    subprocess.Popen(stop_cmd)
+    #
+    #
+    # activity_name = 'com.estrongs.android.pop.view.FileExplorerActivity'
+    #
+    # # Construct the adb command to open the app
+    # open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+    #
+    # subprocess.Popen(open_cmd)
+    #
+    # time.sleep(2)
+    #
+    #
+    #
+    # stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
+    # subprocess.Popen(stop_cmd)
     result = subprocess.run(['adb', 'shell', 'dumpsys', 'package', package_name], capture_output=True, text=True)
 
 

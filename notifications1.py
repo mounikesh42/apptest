@@ -19,24 +19,20 @@ for app_package_name in app_package_names:
 
         # Check if the app's notification importance is not NONE
         if 'importance=NONE' not in line:
-            time.sleep(1)
 
             # Launch the app notification settings
-            subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', f'package:{app_package_name}'])
-
+            applicationdetails=subprocess.run(['adb', 'shell', 'am', 'start', '-a', 'android.settings.APPLICATION_DETAILS_SETTINGS', '-d', f'package:{app_package_name}'])
+            applicationdetails.check_returncode()
             # Wait for a few seconds to ensure that the settings activity is launched
-            time.sleep(3)
 
             # Simulate screen tap at (500, 650)
-            subprocess.run(['adb', 'shell', 'input', 'tap', '500', '650'])
-
+            firsttap=subprocess.run(['adb', 'shell', 'input', 'tap', '500', '650'])
+            firsttap.check_returncode()
             # Wait for a few seconds before simulating the second tap
-            time.sleep(1)
 
             # Simulate screen tap at (500, 550)
-            subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
-
-            time.sleep(1)
+            secondtap=subprocess.run(['adb', 'shell', 'input', 'tap', '500', '550'])
+            secontap.check_returncode()
 
         else:
             print(f'No notification importance found for {app_package_name}')

@@ -7,19 +7,19 @@ def safe():
 
 # Set the package name and activity name for the Chrome app
     package_name = 'com.qihoo.security'
-    activity_name = 'com.qihoo.security.ui.main.HomeActivity'
-
-    # Construct the adb command to open the app
-    open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
-
-    subprocess.Popen(open_cmd)
-
-    time.sleep(2)
-
-
-
-    stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
-    subprocess.Popen(stop_cmd)
+    # activity_name = 'com.qihoo.security.ui.main.HomeActivity'
+    #
+    # # Construct the adb command to open the app
+    # open_cmd = ['adb', 'shell', 'am', 'start', '-n', f'{package_name}/{activity_name}']
+    #
+    # subprocess.Popen(open_cmd)
+    #
+    # time.sleep(2)
+    #
+    #
+    #
+    # stop_cmd = ['adb', 'shell', 'am', 'force-stop', package_name]
+    # subprocess.Popen(stop_cmd)
 
     result = subprocess.run(['adb', 'shell', 'dumpsys', 'package', package_name], capture_output=True, text=True)
 

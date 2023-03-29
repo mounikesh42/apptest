@@ -69,7 +69,7 @@ aceuninstall = subprocess.run(ace, shell=True)
 print(aceuninstall)
 subprocess.run(['adb', 'shell', 'svc', 'wifi', 'disable'])
 
-time.sleep(2)
+# time.sleep()
 
 
 
@@ -115,7 +115,7 @@ def run_and_save():
 
     print(f"Folder exists: {folder_exists}")
     print(f"Number of files: {num_files}")
-    time.sleep(3)
+    time.sleep(1)
     #
     timezone = ['adb', 'shell', 'date "+%Y-%m-%d %H:%M:%S %z"']
 
