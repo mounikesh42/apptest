@@ -178,6 +178,9 @@ def run_and_save():
         writer = csv.writer(f)
         # Write the output list as a new row to the CSV file
         writer.writerow(output_list)
+    with open('output.txt', 'a') as f:
+        # Write the output list as a new line to the text file
+        f.write(' '.join(map(str, output_list)) + '\n')
 
 
 run_and_save()
